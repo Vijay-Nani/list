@@ -755,6 +755,56 @@
 
 
 
+/* ---------------- PRODUCT BLUR ---------------- */
+.coke-item {
+    transition: all 0.3s ease; /* smooth transition for blur and opacity */
+    cursor: pointer;
+}
+
+.coke-item.selected-blur {
+    filter: blur(0.5px) brightness(0.7); /* blur + slight darken effect */
+    opacity: 5;
+}
+
+/* Animate unselect (double-click) */
+.coke-item.remove-blur {
+    animation: unblurEffect 0.3s forwards;
+}
+
+@keyframes unblurEffect {
+    0% {
+        filter: blur(4px) brightness(0.7);
+        opacity: 0.7;
+    }
+    100% {
+        filter: blur(0);
+        opacity: 1;
+    }
+}
+
+/* Mini-cart styling (optional enhancements) */
+#mini-cart {
+    transition: all 0.3s ease;
+}
+
+#mini-cart .cart-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 5px;
+    border-bottom: 1px solid #ddd;
+    gap: 10px;
+}
+
+#mini-cart .item-img-container img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+
+
+
 
 
 
@@ -866,13 +916,15 @@
                 
                 <!-- ITEM 1: Monster original-->
                 <div class="coke-item" 
-                     data-product-id="101" 
+                     data-product-id="101"  
                      data-price="3.50" 
                      data-name="Monster original"
                      data-image-url="https://placehold.co/150x200/8A0303/ffffff?text=Monster original">
                     <img src="Monster original.webp" onerror="this.src='https://placehold.co/150x200/8A0303/ffffff?text=Monster original'" alt="Coca-Cola Classic">
                     <p class="coke-name">Monster original</p>
-                    <p class="coke-price-text">£3.50</p>
+                    <!--
+                     <p class="coke-price-text">£3.50</p>
+                      -->
                     <i class="fas fa-plus-circle add-icon"></i>
                 </div>
 
@@ -884,7 +936,9 @@
                      data-image-url="https://placehold.co/150x200/333333/ffffff?text=Monster zero sugar">
                     <img src="Monster zero sugar.png" onerror="this.src='https://placehold.co/150x200/333333/ffffff?text=Monster zero sugar'" alt="Coca-Cola Zero Sugar">
                     <p class="coke-name">Monster zero sugar</p>
+                   <!-- 
                     <p class="coke-price-text">£3.50</p>
+                     -->
                     <i class="fas fa-plus-circle add-icon"></i>
                 </div>
                 
@@ -896,7 +950,9 @@
                      data-image-url="https://placehold.co/150x200/C10000/ffffff?text=Monster Absolutely zero">
                     <img src="Monster Absolutely zero.webp" onerror="this.src='https://placehold.co/150x200/C10000/ffffff?text=Monster Absolutely zero'" alt="Coca-Cola Cherry">
                     <p class="coke-name">Monster Absolutely zero</p>
-                    <p class="coke-price-text">£3.80</p>
+                   <!--   
+                    <p class="coke-price-text">£3.80</p> 
+                     -->
                     <i class="fas fa-plus-circle add-icon"></i>
                 </div>
 
@@ -908,7 +964,8 @@
                      data-image-url="https://placehold.co/150x200/FAD7A0/000000?text=Monster Nitro">
                     <img src="Monster Nitro.jpg" onerror="this.src='https://placehold.co/150x200/FAD7A0/000000?text=Monster Nitro'" alt="Coca-Cola Vanilla">
                     <p class="coke-name">Monster Nitro</p>
-                    <p class="coke-price-text">£3.80</p>
+                      <!--  
+                    <p class="coke-price-text">£3.80</p> -->
                     <i class="fas fa-plus-circle add-icon"></i>
                 </div>
                 
@@ -920,7 +977,8 @@
                      data-image-url="https://placehold.co/150x200/FAD7A0/000000?text=Monster Nitro Cosmic Peach">
                     <img src="Monster Nitro Cosmic Peach.avif" onerror="this.src='https://placehold.co/150x200/eeeeee/333333?text=Monster Nitro Cosmic Peach'" alt="Diet Coke">
                     <p class="coke-name">Monster Nitro Cosmic Peach</p>
-                    <p class="coke-price-text">£3.50</p>
+                       <!--  
+                    <p class="coke-price-text">£3.50</p> -->
                     <i class="fas fa-plus-circle add-icon"></i>
                 </div>
                 
@@ -932,7 +990,7 @@
                      data-image-url="https://placehold.co/150x200/FAD7A0/000000?text=Monster Lando Norris">
                     <img src="Monster Lando Norris.jpg" onerror="this.src='Monster Lando Norris'" alt="Monster Lando Norris">
                     <p class="coke-name">Monster Lando Norris</p>
-                    <p class="coke-price-text">£3.80</p>
+                <!--         <p class="coke-price-text">£3.80</p> -->
                     <i class="fas fa-plus-circle add-icon"></i>
                 </div>
             </div>
@@ -953,7 +1011,7 @@
                      data-image-url="https://placehold.co/150x200/8A0303/ffffff?text=Monster Full Throttle">
                     <img src="Monster Full Throttle.jpeg" onerror="this.src='https://placehold.co/150x200/8A0303/ffffff?text=Monster Full Throttle'" alt="Coca-Cola Classic">
                     <p class="coke-name">Monster Full Throttle</p>
-                    <p class="coke-price-text">£3.50</p>
+                   <!--      <p class="coke-price-text">£3.50</p> -->
                     <i class="fas fa-plus-circle add-icon"></i>
                 </div>
 
@@ -965,7 +1023,7 @@
                      data-image-url="https://placehold.co/150x200/333333/ffffff?text=Monster Rossi">
                     <img src="Monster Rossi.jpg" onerror="this.src='https://placehold.co/150x200/333333/ffffff?text=Monster Rossi'" alt="Coca-Cola Zero Sugar">
                     <p class="coke-name">Monster Rossi</p>
-                    <p class="coke-price-text">£3.50</p>
+                  <!--       <p class="coke-price-text">£3.50</p> -->
                     <i class="fas fa-plus-circle add-icon"></i>
                 </div>
                 
@@ -977,7 +1035,7 @@
                      data-image-url="https://placehold.co/150x200/C10000/ffffff?text=Monster Rossi Zero sugar">
                     <img src="Monster Rossi Zero sugar.jpg" onerror="this.src='https://placehold.co/150x200/C10000/ffffff?text=Monster Rossi Zero sugar'" alt="Coca-Cola Cherry">
                     <p class="coke-name">Monster Rossi Zero sugar</p>
-                    <p class="coke-price-text">£3.80</p>
+                  <!--       <p class="coke-price-text">£3.80</p> -->
                     <i class="fas fa-plus-circle add-icon"></i>
                 </div>
 
@@ -989,7 +1047,7 @@
                      data-image-url="https://placehold.co/150x200/FAD7A0/000000?text=Monster Reserve White Pineapple">
                     <img src="Monster Reserve White Pineapple.jpg" onerror="this.src='https://placehold.co/150x200/FAD7A0/000000?text=Monster Reserve White Pineapple'" alt="Coca-Cola Vanilla">
                     <p class="coke-name">Monster Reserve White Pineapple</p>
-                    <p class="coke-price-text">£3.80</p>
+               <!--          <p class="coke-price-text">£3.80</p> -->
                     <i class="fas fa-plus-circle add-icon"></i>
                 </div>
                 
@@ -1001,7 +1059,7 @@
                      data-image-url="https://placehold.co/150x200/eeeeee/333333?text=Monster RESERVE ORANGE DREAMSICLE ">
                     <img src="Monster RESERVE ORANGE DREAMSICLE  .avif" onerror="this.src='https://placehold.co/150x200/eeeeee/333333?text=Monster RESERVE ORANGE DREAMSICLE '" alt="Diet Coke">
                     <p class="coke-name">Monster RESERVE ORANGE DREAMSICLE </p>
-                    <p class="coke-price-text">£3.50</p>
+               <!--          <p class="coke-price-text">£3.50</p> -->
                     <i class="fas fa-plus-circle add-icon"></i>
                 </div>
                 
@@ -1013,7 +1071,7 @@
                      data-image-url="https://placehold.co/150x200/006400/ffffff?text=MONSTER PIPELINE PUNCH">
                     <img src="MONSTER PIPELINE PUNCH  .jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=MONSTER PIPELINE PUNCH'" alt="Coca-Cola Lime">
                     <p class="coke-name">MONSTER PIPELINE PUNCH</p>
-                    <p class="coke-price-text">£3.80</p>
+               <!--          <p class="coke-price-text">£3.80</p> -->
                     <i class="fas fa-plus-circle add-icon"></i>
                 </div>
 
@@ -1029,7 +1087,7 @@
                      data-image-url="https://placehold.co/150x200/006400/ffffff?text=MONSTER MANGO LOCO ">
                     <img src="MONSTER MANGO LOCO .avif" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=MONSTER MANGO LOCO '" alt="Coca-Cola Lime">
                     <p class="coke-name">MONSTER MANGO LOCO </p>
-                    <p class="coke-price-text">£3.80</p>
+              <!--           <p class="coke-price-text">£3.80</p> -->
                     <i class="fas fa-plus-circle add-icon"></i>
                 </div>
 
@@ -1042,7 +1100,7 @@
                      data-image-url="https://placehold.co/150x200/006400/ffffff?text=MONSTER PACIFIC PUNCH">
                     <img src="MONSTER PACIFIC PUNCH  .jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=MONSTER PACIFIC PUNCH'" alt="Coca-Cola Lime">
                     <p class="coke-name">MONSTER PACIFIC PUNCH </p>
-                    <p class="coke-price-text">£3.80</p>
+             <!--            <p class="coke-price-text">£3.80</p> -->
                     <i class="fas fa-plus-circle add-icon"></i>
                 </div>
 
@@ -1056,7 +1114,7 @@
                      data-image-url="https://placehold.co/150x200/006400/ffffff?text=MONSTER MONARCH ">
                     <img src="MONSTER MONARCH  .avif" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=MONSTER MONARCH '" alt="Coca-Cola Lime">
                     <p class="coke-name">MONSTER MONARCH</p>
-                    <p class="coke-price-text">£3.80</p>
+             <!--            <p class="coke-price-text">£3.80</p> -->
                     <i class="fas fa-plus-circle add-icon"></i>
                 </div>
 
@@ -1071,7 +1129,7 @@
                      data-image-url="https://placehold.co/150x200/006400/ffffff?text=MONSTER RIPPER ">
                     <img src="MONSTER RIPPER.avif" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=MONSTER RIPPER'" alt="Coca-Cola Lime">
                     <p class="coke-name">MONSTER RIPPER </p>
-                    <p class="coke-price-text">£3.80</p>
+             <!--            <p class="coke-price-text">£3.80</p> -->
                     <i class="fas fa-plus-circle add-icon"></i>
                 </div>
 
@@ -1086,7 +1144,7 @@
                      data-image-url="https://placehold.co/150x200/006400/ffffff?text=MONSTER MIXXD PUNCH ">
                     <img src="MONSTER MIXXD PUNCH .jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=MONSTER MIXXD PUNCH '" alt="Coca-Cola Lime">
                     <p class="coke-name">MONSTER MIXXD PUNCH </p>
-                    <p class="coke-price-text">£3.80</p>
+              <!--           <p class="coke-price-text">£3.80</p> -->
                     <i class="fas fa-plus-circle add-icon"></i>
                 </div>
 
@@ -1101,7 +1159,7 @@
                      data-image-url="https://placehold.co/150x200/006400/ffffff?text=MONSTER KHAOTIC">
                     <img src="MONSTER KHAOTIC .jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=MONSTER KHAOTIC'" alt="Coca-Cola Lime">
                     <p class="coke-name">MONSTER KHAOTIC</p>
-                    <p class="coke-price-text">£3.80</p>
+          <!--               <p class="coke-price-text">£3.80</p> -->
                     <i class="fas fa-plus-circle add-icon"></i>
                 </div>
 
@@ -1116,7 +1174,7 @@
                      data-image-url="https://placehold.co/150x200/006400/ffffff?text=MONSTER AUSSIE LEMONADE ">
                     <img src="MONSTER AUSSIE LEMONADE  .jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=MONSTER AUSSIE LEMONADE '" alt="Coca-Cola Lime">
                     <p class="coke-name">MONSTER AUSSIE LEMONADE </p>
-                    <p class="coke-price-text">£3.80</p>
+       <!--                  <p class="coke-price-text">£3.80</p> -->
                     <i class="fas fa-plus-circle add-icon"></i>
                 </div>
 
@@ -1131,7 +1189,7 @@
                      data-image-url="https://placehold.co/150x200/006400/ffffff?text=MONSTER BAD APPLE">
                     <img src="MONSTER BAD APPLE .jpeg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=MONSTER BAD APPLE'" alt="Coca-Cola Lime">
                     <p class="coke-name">MONSTER BAD APPLE</p>
-                    <p class="coke-price-text">£3.80</p>
+            <!--             <p class="coke-price-text">£3.80</p> -->
                     <i class="fas fa-plus-circle add-icon"></i>
                 </div>
 
@@ -1146,7 +1204,7 @@
                      data-image-url="https://placehold.co/150x200/006400/ffffff?text=MONSTER RIO PUNCH">
                     <img src="MONSTER RIO PUNCH.jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=MONSTER RIO PUNCH'" alt="Coca-Cola Lime">
                     <p class="coke-name">MONSTER RIO PUNCH</p>
-                    <p class="coke-price-text">£3.80</p>
+             <!--            <p class="coke-price-text">£3.80</p> -->
                     <i class="fas fa-plus-circle add-icon"></i>
                 </div>
 
@@ -1161,7 +1219,7 @@
                      data-image-url="https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA WHITE ">
                     <img src="Monster ULTRA WHITE  .jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA WHITE '" alt="Coca-Cola Lime">
                     <p class="coke-name">Monster ULTRA WHITE </p>
-                    <p class="coke-price-text">£3.80</p>
+                <!--         <p class="coke-price-text">£3.80</p> -->
                     <i class="fas fa-plus-circle add-icon"></i>
                 </div>
 
@@ -1176,7 +1234,7 @@
                      data-image-url="https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA FIESTA MANGO">
                     <img src="Monster ULTRA FIESTA MANGO  .jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA FIESTA MANGO '" alt="Coca-Cola Lime">
                     <p class="coke-name">Monster ULTRA FIESTA MANGO </p>
-                    <p class="coke-price-text">£3.80</p>
+                 <!--        <p class="coke-price-text">£3.80</p> -->
                     <i class="fas fa-plus-circle add-icon"></i>
                 </div>
 
@@ -1191,7 +1249,7 @@
                      data-image-url="https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA PARADISE ">
                     <img src="Monster ULTRA PARADISE  .jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA PARADISE '" alt="Coca-Cola Lime">
                     <p class="coke-name">Monster ULTRA PARADISE </p>
-                    <p class="coke-price-text">£3.80</p>
+                <!--         <p class="coke-price-text">£3.80</p> -->
                     <i class="fas fa-plus-circle add-icon"></i>
                 </div>
 
@@ -1206,7 +1264,7 @@
                      data-image-url="https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA ROSA">
                     <img src="Monster ULTRA ROSA .jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA ROSA'" alt="Coca-Cola Lime">
                     <p class="coke-name">Monster ULTRA ROSA</p>
-                    <p class="coke-price-text">£3.80</p>
+                <!--         <p class="coke-price-text">£3.80</p> -->
                     <i class="fas fa-plus-circle add-icon"></i>
                 </div>
 
@@ -1221,7 +1279,7 @@
                      data-image-url="https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA WATERMELON">
                     <img src="Monster ULTRA WATERMELON  .avif" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA WATERMELON'" alt="Coca-Cola Lime">
                     <p class="coke-name">Monster ULTRA WATERMELON</p>
-                    <p class="coke-price-text">£3.80</p>
+                <!--         <p class="coke-price-text">£3.80</p> -->
                     <i class="fas fa-plus-circle add-icon"></i>
                 </div>
 
@@ -1237,7 +1295,7 @@
                      data-image-url="https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA GOLDEN PINEAPPLE ">
                     <img src="Monster ULTRA GOLDEN PINEAPPLE  .jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA GOLDEN PINEAPPLE '" alt="Coca-Cola Lime">
                     <p class="coke-name">Monster ULTRA GOLDEN PINEAPPLE </p>
-                    <p class="coke-price-text">£3.80</p>
+               <!--          <p class="coke-price-text">£3.80</p> -->
                     <i class="fas fa-plus-circle add-icon"></i>
                 </div>
 
@@ -1253,7 +1311,7 @@
                      data-image-url="https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA PEACHY KEEN ">
                     <img src="Monster ULTRA PEACHY KEEN  .jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA PEACHY KEEN '" alt="Coca-Cola Lime">
                     <p class="coke-name">Monster ULTRA PEACHY KEEN </p>
-                    <p class="coke-price-text">£3.80</p>
+               <!--          <p class="coke-price-text">£3.80</p> -->
                     <i class="fas fa-plus-circle add-icon"></i>
                 </div>
 
@@ -1269,7 +1327,7 @@
                      data-image-url="https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA STRAWBERRY DREAMS">
                     <img src="Monster ULTRA STRAWBERRY DREAMS .webp" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA STRAWBERRY DREAMS '" alt="Coca-Cola Lime">
                     <p class="coke-name">Monster ULTRA STRAWBERRY DREAMS </p>
-                    <p class="coke-price-text">£3.80</p>
+               <!--          <p class="coke-price-text">£3.80</p> -->
                     <i class="fas fa-plus-circle add-icon"></i>
                 </div>
 
@@ -1286,7 +1344,7 @@
                      data-image-url="https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA FANTASY RUBYRED">
                     <img src="Monster ULTRA FANTASY RUBYRED.jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA FANTASY RUBYRED'" alt="Coca-Cola Lime">
                     <p class="coke-name">Monster ULTRA FANTASY RUBYRED</p>
-                    <p class="coke-price-text">£3.80</p>
+               <!--          <p class="coke-price-text">£3.80</p>-->
                     <i class="fas fa-plus-circle add-icon"></i>
                 </div>
 
@@ -2141,51 +2199,13 @@
 
 <script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* ---------------- CART STATE ---------------- */
 let cartItems = [];
-let selectedProducts = new Set();  // NEW: store unique selected product IDs
+let selectedProducts = new Set();  // store unique selected product IDs
 
 const miniCart = document.getElementById('mini-cart');
 const miniCartItemsContainer = document.getElementById('mini-cart-items');
 const miniCartCount = document.getElementById('mini-cart-count');
-const miniCartTotalElement = document.getElementById('mini-cart-total');
 const notificationElement = document.getElementById('notification');
 
 /* ---------------- UTILITIES ---------------- */
@@ -2198,21 +2218,14 @@ function showNotification(message) {
 }
 
 function calculateTotals() {
-    let total = 0;
     let quantity = 0;
-
-    cartItems.forEach(item => {
-        total += item.price * item.qty;
-        quantity += item.qty;
-    });
-
-    return { total, quantity };
+    cartItems.forEach(item => quantity += item.qty);
+    return { quantity };
 }
 
 function renderMiniCart() {
-    const { total, quantity } = calculateTotals();
+    const { quantity } = calculateTotals();
     miniCartCount.textContent = quantity;
-    miniCartTotalElement.textContent = `£${total.toFixed(2)}`;
 
     const checkoutBtn = document.getElementById('view-cart-checkout-btn');
     const shareBtns = document.querySelectorAll('.share-btn');
@@ -2235,8 +2248,7 @@ function renderMiniCart() {
 
                 <div class="item-details">
                     <p class="item-name">${item.name}</p>
-                    <p class="item-price">£${item.price.toFixed(2)} x ${item.qty}</p>
-                    <p>Subtotal: £${(item.price * item.qty).toFixed(2)}</p>
+                    <p class="item-quantity">Quantity: ${item.qty}</p>
                 </div>
 
                 <div class="item-actions">
@@ -2254,27 +2266,22 @@ function renderMiniCart() {
 function formatCartForText(formatType) {
     if (cartItems.length === 0) return "";
 
-    const { total, quantity } = calculateTotals();
     const date = new Date().toLocaleDateString();
     let output = "";
 
     if (formatType === 'csv') {
-        output += "Product Name,Price,Quantity,Subtotal\n";
+        output += "Product Name,Quantity\n";
         cartItems.forEach(item => {
             const safeName = item.name.includes(",") ? `"${item.name}"` : item.name;
-            output += `${safeName},${item.price.toFixed(2)},${item.qty},${(item.price * item.qty).toFixed(2)}\n`;
+            output += `${safeName},${item.qty}\n`;
         });
     } else {
-        output += `--- HAMPERS.COM Order Summary ---\n`;
+        output += `--- Order Summary ---\n`;
         output += `Date: ${date}\n\n`;
-
         output += cartItems
-            .map(item => `(${item.qty}x) ${item.name} | £${(item.price * item.qty).toFixed(2)}`)
+            .map(item => `(${item.qty}x) ${item.name}`)
             .join("\n");
-
-        output += `\n\nTotal Items: ${quantity}\n`;
-        output += `FINAL TOTAL: £${total.toFixed(2)}`;
-
+        output += `\n\nTotal Items: ${cartItems.length}`;
         if (formatType === "whatsapp") output = encodeURIComponent(output);
     }
 
@@ -2335,7 +2342,6 @@ function initListeners() {
         btn.addEventListener("click", e => {
             const card = e.target.closest(".product-card");
             const id = Number(card.dataset.productId);
-            const price = Number(card.dataset.price);
             const name = card.dataset.name;
             const image = "https://placehold.co/60x60/808080/ffffff?text=H";
 
@@ -2347,8 +2353,7 @@ function initListeners() {
             }
 
             selectedProducts.add(id);
-
-            cartItems.push({ id, name, price, qty: 1, image });
+            cartItems.push({ id, name, qty: 1, image });
 
             showNotification(`Added 1x ${name}`);
             renderMiniCart();
@@ -2356,38 +2361,45 @@ function initListeners() {
         });
     });
 
-    /* -------- UPDATED: Monster / Coke click handler -------- */
+    /* Coke item click / double-click handler */
     document.querySelectorAll('.coke-item').forEach(item => {
-        item.addEventListener('click', () => {
 
+        // Single click: add to cart
+        item.addEventListener('click', () => {
             const id = Number(item.dataset.productId);
-            const price = Number(item.dataset.price);
             const name = item.dataset.name;
             const image = item.dataset.imageUrl;
 
-            // Prevent selecting again
             if (selectedProducts.has(id)) {
                 showNotification("Product already selected");
                 item.classList.add("selected-blur");
                 return;
             }
 
-            // Store unique selection
             selectedProducts.add(id);
-
-            // Add to cart
-            cartItems.push({ id, name, price, qty: 1, image });
-
-            // Blur the selected product visually
+            cartItems.push({ id, name, qty: 1, image });
             item.classList.add("selected-blur");
 
             showNotification(`Added 1x ${name}`);
             renderMiniCart();
             miniCart.classList.remove("hidden");
         });
+
+        // Double click: remove from cart & remove blur
+        item.addEventListener('dblclick', () => {
+            const id = Number(item.dataset.productId);
+            if (!selectedProducts.has(id)) return;
+
+            selectedProducts.delete(id);
+            cartItems = cartItems.filter(cartItem => cartItem.id !== id);
+            item.classList.remove("selected-blur");
+
+            showNotification(`Unselected ${item.dataset.name}`);
+            renderMiniCart();
+        });
     });
 
-    /* Remove item */
+    /* Remove item from mini-cart */
     miniCartItemsContainer.addEventListener("click", e => {
         if (e.target.closest(".remove-item-btn")) {
             const id = Number(e.target.closest(".remove-item-btn").dataset.id);
@@ -2395,7 +2407,6 @@ function initListeners() {
             cartItems = cartItems.filter(item => item.id !== id);
             selectedProducts.delete(id);
 
-            // Remove blur in main product grid
             const productEl = document.querySelector(`.coke-item[data-product-id='${id}']`);
             if (productEl) productEl.classList.remove("selected-blur");
 
@@ -2408,13 +2419,10 @@ function initListeners() {
     document.getElementById("view-cart-checkout-btn").addEventListener("click", () => {
         if (cartItems.length === 0) return;
 
-        const { total } = calculateTotals();
-        showNotification(`Checkout: £${total.toFixed(2)} (mock)`);
+        showNotification(`Checkout complete (mock)`);
 
         cartItems = [];
         selectedProducts.clear();
-
-        // remove all blur
         document.querySelectorAll('.coke-item').forEach(i => i.classList.remove('selected-blur'));
 
         renderMiniCart();
@@ -2443,16 +2451,9 @@ document.addEventListener("DOMContentLoaded", () => {
     renderMiniCart();
 });
 
-
-/* ---------------- search---------------- */
-
-
-
-
-
+/* ---------------- SEARCH ---------------- */
 document.getElementById("searchInput").addEventListener("input", function () {
     let searchText = this.value.toLowerCase();
-
     document.querySelectorAll(".coke-item").forEach(item => {
         let name = item.dataset.name.toLowerCase();
         item.style.display = name.includes(searchText) ? "block" : "none";
@@ -2463,6 +2464,25 @@ document.getElementById("searchInput").addEventListener("input", function () {
 
 
 
+
+
+// Double click: remove from cart & remove blur with animation
+item.addEventListener('dblclick', () => {
+    const id = Number(item.dataset.productId);
+    if (!selectedProducts.has(id)) return;
+
+    selectedProducts.delete(id);
+    cartItems = cartItems.filter(cartItem => cartItem.id !== id);
+
+    // Animate blur removal
+    item.classList.add("remove-blur");
+    setTimeout(() => {
+        item.classList.remove("selected-blur", "remove-blur");
+    }, 300); // match duration of animation
+
+    showNotification(`Unselected ${item.dataset.name}`);
+    renderMiniCart();
+});
 
 
 
