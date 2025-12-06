@@ -1,0 +1,2513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAMPERS.COM - Custom & Luxury Hampers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* --- GLOBAL STYLES --- */
+        :root {
+            --color-dark-teal: #004d4d;
+            --color-rich-red: #8A0303;
+            --color-gold: #ffc107;
+            --color-light-gray: #f7f7f7;
+            --color-white: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e8f5e9; /* Very light green/gray background */
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        .main-header {
+
+                top: 0;
+                left: 0;
+                width: 100%;
+                background: white;     /* or your website color */
+                z-index: 9999;
+                padding: 10px 0;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                 background-color: var(--color-dark-teal);
+                 color: var(--color-white);
+                padding: 15px 0;
+                 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--color-gold);
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+        .tagline {
+            font-size: 14px;
+            margin-top: -10px;
+            color: #99cccc;
+        }
+
+        .cart-icon {
+            background: none;
+            border: none;
+            color: var(--color-white);
+            font-size: 24px;
+            cursor: pointer;
+            position: relative;
+            padding: 10px;
+            transition: color 0.2s;
+        }
+        .cart-icon:hover {
+            color: var(--color-gold);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: var(--color-rich-red);
+            border-radius: 50%;
+            padding: 2px 7px;
+            font-size: 12px;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        /* --- BUTTONS --- */
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .dark-teal-bg-btn {
+            background-color: var(--color-dark-teal);
+            color: var(--color-white);
+        }
+
+        .dark-teal-bg-btn:hover {
+            background-color: #003333;
+            transform: translateY(-1px);
+        }
+
+        .red-bg-btn {
+            background-color: var(--color-rich-red);
+            color: var(--color-white);
+        }
+        .red-bg-btn:hover {
+            background-color: #660202;
+        }
+        
+        /* --- PRODUCT GRID --- */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 40px 0;
+        }
+
+        .product-card {
+            background: var(--color-white);
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            padding: 20px;
+            text-align: center;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.12);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .product-card h3 {
+            color: var(--color-dark-teal);
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .product-card p {
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 1.8em;
+            color: var(--color-rich-red);
+            font-weight: 700;
+            display: block;
+            margin-bottom: 15px;
+        }
+        
+        /* --- MINI CART OVERLAY --- */
+        .mini-cart {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 350px;
+            height: 100%;
+            background-color: var(--color-white);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transform: translateX(100%);
+            transition: transform 0.4s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .mini-cart.hidden {
+            transform: translateX(100%);
+        }
+
+        .mini-cart.visible {
+            transform: translateX(0);
+        }
+
+        .mini-cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--color-dark-teal);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .mini-cart-header h3 {
+            color: var(--color-dark-teal);
+            margin: 0;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--color-rich-red);
+        }
+
+        .mini-cart-items {
+            flex-grow: 1;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px dashed #ccc;
+        }
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-img-container {
+            width: 60px;
+            height: 60px;
+            margin-right: 10px;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+        .item-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .item-details {
+            flex-grow: 1;
+        }
+
+        .item-details p {
+            margin: 2px 0;
+            font-size: 14px;
+        }
+
+        .item-details .item-name {
+            font-weight: bold;
+            color: var(--color-dark-teal);
+        }
+
+        .item-details .item-price {
+            color: var(--color-rich-red);
+        }
+
+        .item-actions {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .item-qty {
+            width: 30px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 3px;
+        }
+
+        .remove-item-btn {
+            background: none;
+            border: none;
+            color: var(--color-rich-red);
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .mini-cart-footer {
+            border-top: 2px solid var(--color-dark-teal);
+            padding-top: 15px;
+            text-align: right;
+        }
+
+        .mini-cart-footer p {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: var(--color-dark-teal);
+            margin-bottom: 10px;
+        }
+
+        /* --- NEW SHARE/EXPORT BUTTONS GROUP --- */
+        .share-options-group {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+        .share-btn {
+            padding: 8px 10px;
+            font-size: 12px;
+            flex-grow: 1;
+        }
+        .whatsapp-btn {
+            background-color: #25D366; /* WhatsApp Green */
+        }
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+        }
+        /* --- END NEW SHARE/EXPORT BUTTONS GROUP --- */
+
+        .checkout-btn {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1em;
+        }
+
+        /* --- COCA-COLA BUILD-YOUR-OWN SECTION STYLES (NEW FEATURE) --- */
+        .build-your-own-section {
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            margin-top: 30px;
+            background-color: var(--color-light-gray);
+            border-radius: 12px;
+        }
+        .build-your-own-section h2 {
+            font-size: 32px;
+            color: var(--color-rich-red); /* Rich Red Headline */
+            margin-bottom: 5px;
+        }
+        .sub-heading {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .coca-cola-grid {
+            display: grid;
+            /* 3 columns in a row */
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto 40px;
+        }
+
+        .coke-item {
+            background: var(--color-white);
+            padding: 15px;
+            border: 3px solid #f0f0f0;
+            border-radius: 8px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.2s ease-out;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .coke-item:hover {
+            border-color: var(--color-gold); /* Highlight border on hover */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .coke-item img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: contain; 
+            transition: transform 0.3s;
+            border-radius: 4px;
+        }
+
+        .coke-item:hover img {
+            transform: scale(1.03);
+        }
+
+        .coke-name {
+            font-weight: bold;
+            margin-top: 10px;
+            font-size: 18px;
+            color: var(--color-dark-teal);
+        }
+
+        .coke-price-text {
+            color: var(--color-rich-red); 
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        /* Visual feedback for adding/selected state */
+        .add-icon {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 24px;
+            color: var(--color-dark-teal); 
+            opacity: 0; /* Hidden by default */
+            transition: opacity 0.2s, transform 0.2s;
+            transform: scale(0.8);
+            pointer-events: none; /* Icon is not the target of the click */
+        }
+
+        .coke-item:hover .add-icon {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .view-cart-cta {
+            text-align: center;
+        }
+        .view-cart-cta .btn {
+            width: auto;
+            display: inline-block;
+            padding: 15px 40px;
+            font-size: 16px;
+        }
+        
+        /* Message Box / Notification (Replacing alert) */
+        #notification {
+            position: fixed;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--color-dark-teal);
+            color: var(--color-white);
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 2000;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            pointer-events: none;
+        }
+        #notification.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .mini-cart {
+                width: 100%;
+            }
+            .coca-cola-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- Portfolio Footer Styles - Themed to Match Hamper Store --- */
+
+/* Base container for the entire footer */
+.portfolio-footer {
+    /* Background: Dark Teal from the shop's header/buttons */
+    background-color: #004d4d; 
+    color: #ffffff; /* White text for high contrast */
+    padding: 40px 20px 20px;
+    font-family: 'Inter', sans-serif;
+    /* Accent line: Gold, matching the logo color */
+    border-top: 4px solid #ffc107; 
+}
+
+/* Container for the main content (contact info and form) */
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 50px; 
+    padding-bottom: 30px;
+    /* Subtle separator: Light opacity white */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15); 
+}
+
+/* General styling for headers */
+.portfolio-footer h3 {
+    font-size: 1.5rem;
+    color: #ffc107; /* Headers: Gold accent */
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+/* Contact Information Section */
+.contact-info {
+    flex: 1; 
+    min-width: 300px; 
+}
+
+.contact-info p {
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.contact-info a {
+    color: #ffffff;
+    text-decoration: none;
+    border-bottom: 1px dashed #8A0303; /* Rich Red dashed underline */
+    transition: color 0.3s;
+}
+
+.contact-info a:hover {
+    color: #ffc107; /* Highlight link with Gold on hover */
+    border-bottom: 1px solid #ffc107;
+}
+
+/* Contact Form Section */
+.contact-form {
+    flex: 2; 
+    min-width: 350px; 
+    /* Form Background: Slightly lighter teal for distinction */
+    background: #006666; 
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.contact-form label {
+    display: block; 
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    /* Border: Subtle light color */
+    border: 1px solid rgba(255, 255, 255, 0.3); 
+    border-radius: 4px;
+    /* Input background: Match the main footer background */
+    background-color: #004d4d; 
+    color: #ffffff;
+    box-sizing: border-box; 
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.contact-form textarea {
+    resize: vertical; 
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    /* Focus: Rich Red accent, matching the action button */
+    border-color: #8A0303; 
+    outline: none;
+    box-shadow: 0 0 5px rgba(138, 3, 3, 0.8);
+}
+
+/* Submit Button */
+.submit-btn {
+    /* Button Color: Rich Red, matching the shop's primary action button */
+    background-color: #8A0303; 
+    color: #ffffff;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px; /* Slightly more rounded corners */
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.1s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.submit-btn:hover {
+    background-color: #660202; /* Slightly darker Rich Red on hover */
+    transform: translateY(-1px);
+}
+
+.submit-btn:active {
+    transform: translateY(1px);
+}
+
+/* Footer Bottom (Copyright) */
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+}
+
+.footer-bottom p {
+    margin: 0;
+    /* Muted copyright text */
+    color: rgba(255, 255, 255, 0.5); 
+    font-size: 0.85rem;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; 
+        gap: 30px;
+    }
+    
+    .contact-info, .contact-form {
+        min-width: 100%; 
+    }
+
+    .portfolio-footer {
+        padding: 25px 15px 10px;
+    }
+
+    .contact-form {
+        padding: 15px;
+    }
+}
+
+
+
+
+
+
+
+
+.coke-item.selected-blur {
+    filter: blur(0.2px) brightness(0.6);
+    pointer-events: none;
+    opacity: 10;
+    transition: 0.3s ease;
+}
+
+
+
+
+
+/* ------- SEARCH ------) */
+
+
+
+
+
+
+
+
+
+
+.top-logo-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    z-index: 9999;
+    padding: 10px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 95%;
+    margin: auto;
+}
+
+.header-left, .header-middle, .header-right {
+    display: flex;
+    align-items: center;
+}
+
+.header-left {
+    width: 20%;
+}
+
+.header-middle {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+}
+
+.header-right {
+    width: 20%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.header-logo {
+    width: 60px;
+}
+
+/* SEARCH BAR */
+#searchInput {
+    width: 100%;
+    max-width: 350px;
+    padding: 8px 12px;
+    border: 2px solid #ccc;
+    border-radius: 25px;
+    font-size: 16px;
+}
+
+/* Prevent content hiding behind header */
+.main-content {
+    margin-top: 100px;
+}
+
+/* Responsive for mobile */
+@media (max-width: 600px) {
+    .header-content {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .header-left, .header-middle, .header-right {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+
+
+
+
+
+
+/* ---------------- PRODUCT BLUR ---------------- */
+.coke-item {
+    transition: all 0.3s ease; /* smooth transition for blur and opacity */
+    cursor: pointer;
+}
+
+.coke-item.selected-blur {
+    filter: blur(0.5px) brightness(0.7); /* blur + slight darken effect */
+    opacity: 5;
+}
+
+/* Animate unselect (double-click) */
+.coke-item.remove-blur {
+    animation: unblurEffect 0.3s forwards;
+}
+
+@keyframes unblurEffect {
+    0% {
+        filter: blur(4px) brightness(0.7);
+        opacity: 0.7;
+    }
+    100% {
+        filter: blur(0);
+        opacity: 1;
+    }
+}
+
+/* Mini-cart styling (optional enhancements) */
+#mini-cart {
+    transition: all 0.3s ease;
+}
+
+#mini-cart .cart-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 5px;
+    border-bottom: 1px solid #ddd;
+    gap: 10px;
+}
+
+#mini-cart .item-img-container img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+
+
+
+
+
+
+
+/* ---------------------------------------- */
+
+
+/* ---------------------------------------- */
+
+
+
+
+
+
+
+
+
+        
+    </style>
+</head>
+<body>
+
+    <!-- Notification Message Box -->
+    <div id="notification"></div>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container header-content">
+            <div class="logo-container">
+                <a href="#" class="logo">Hampers.</a>
+                <p class="tagline">Gifts of Luxury</p>
+            </div>
+
+
+
+    <!--  SEARCH -->
+
+
+
+
+            
+ <div class="header-middle">
+            <input type="text" id="searchInput" placeholder="Search products..." />
+        </div>
+
+
+
+
+
+
+            <button class="cart-icon" id="open-mini-cart-btn">
+                <i class="fas fa-shopping-basket"></i>
+                <span class="cart-count" id="mini-cart-count">0</span>
+            </button>
+        </div>
+    </header>
+
+
+
+
+
+    
+    
+
+    <!-- Mini Cart Overlay -->
+    <div class="mini-cart hidden" id="mini-cart">
+        <div class="mini-cart-header">
+            <h3>Your Basket</h3>
+            <button class="close-cart" id="close-mini-cart-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="mini-cart-items" id="mini-cart-items">
+            <!-- Items will be injected here -->
+        </div>
+        <div class="mini-cart-footer">
+            <p>Total: <span id="mini-cart-total">£0.00</span></p>
+            
+            <!-- NEW EXPORT/SHARE BUTTONS -->
+            <div class="share-options-group">
+                <button class="btn dark-teal-bg-btn share-btn" id="export-txt-btn" title="Export as Plain Text"><i class="fas fa-file-alt"></i> TXT</button>
+                <button class="btn dark-teal-bg-btn share-btn" id="export-csv-btn" title="Export as Excel CSV"><i class="fas fa-file-excel"></i> CSV</button>
+                <button class="btn share-btn whatsapp-btn" id="share-whatsapp-btn" title="Share via WhatsApp"><i class="fab fa-whatsapp"></i> Share</button>
+            </div>
+            <!-- END NEW EXPORT/SHARE BUTTONS -->
+
+            <button class="btn red-bg-btn checkout-btn" id="view-cart-checkout-btn">
+                View Full Cart & Checkout
+            </button>
+        </div>
+    </div>
+
+
+
+ <!-- -----------------------------------------------The Monster Collection start --------------------------------------------------------->
+
+
+    <!-- Main Content -->
+    <main class="container">
+        
+        <!-- === COCA-COLA BUILD-YOUR-OWN SECTION (Image Click Feature) === -->
+        <div class="build-your-own-section">
+            <h2>The Monster Collection 🥤</h2>
+            <img src="monsterlogo.png" width="200px" alt="">
+            <p class="sub-heading">Click on any bottle to add it instantly to your hamper.</p>
+
+            <div class="coca-cola-grid">
+                
+                <!-- ITEM 1: Monster original-->
+                <div class="coke-item" 
+                     data-product-id="101"  
+                     data-price="3.50" 
+                     data-name="Monster original"
+                     data-image-url="https://placehold.co/150x200/8A0303/ffffff?text=Monster original">
+                    <img src="Monster original.webp" onerror="this.src='https://placehold.co/150x200/8A0303/ffffff?text=Monster original'" alt="Coca-Cola Classic">
+                    <p class="coke-name">Monster original</p>
+                    <!--
+                     <p class="coke-price-text">£3.50</p>
+                      -->
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+                <!-- ITEM 2: Monster zero sugar -->
+                <div class="coke-item" 
+                     data-product-id="102" 
+                     data-price="3.50" 
+                     data-name="Monster zero sugar"
+                     data-image-url="https://placehold.co/150x200/333333/ffffff?text=Monster zero sugar">
+                    <img src="Monster zero sugar.png" onerror="this.src='https://placehold.co/150x200/333333/ffffff?text=Monster zero sugar'" alt="Coca-Cola Zero Sugar">
+                    <p class="coke-name">Monster zero sugar</p>
+                   <!-- 
+                    <p class="coke-price-text">£3.50</p>
+                     -->
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+                
+                <!-- ITEM 3: Monster Absolutely zero -->
+                <div class="coke-item" 
+                     data-product-id="103" 
+                     data-price="3.80" 
+                     data-name="Monster Absolutely zero"
+                     data-image-url="https://placehold.co/150x200/C10000/ffffff?text=Monster Absolutely zero">
+                    <img src="Monster Absolutely zero.webp" onerror="this.src='https://placehold.co/150x200/C10000/ffffff?text=Monster Absolutely zero'" alt="Coca-Cola Cherry">
+                    <p class="coke-name">Monster Absolutely zero</p>
+                   <!--   
+                    <p class="coke-price-text">£3.80</p> 
+                     -->
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+                <!-- ITEM 4: Monster Nitro -->
+                <div class="coke-item" 
+                     data-product-id="104" 
+                     data-price="3.80" 
+                     data-name="Monster Nitro"
+                     data-image-url="https://placehold.co/150x200/FAD7A0/000000?text=Monster Nitro">
+                    <img src="Monster Nitro.jpg" onerror="this.src='https://placehold.co/150x200/FAD7A0/000000?text=Monster Nitro'" alt="Coca-Cola Vanilla">
+                    <p class="coke-name">Monster Nitro</p>
+                      <!--  
+                    <p class="coke-price-text">£3.80</p> -->
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+                
+                <!-- ITEM 5: Monster Nitro Cosmic Peach -->
+                <div class="coke-item" 
+                     data-product-id="105" 
+                     data-price="3.50" 
+                     data-name="Monster Nitro Cosmic Peach"
+                     data-image-url="https://placehold.co/150x200/FAD7A0/000000?text=Monster Nitro Cosmic Peach">
+                    <img src="Monster Nitro Cosmic Peach.avif" onerror="this.src='https://placehold.co/150x200/eeeeee/333333?text=Monster Nitro Cosmic Peach'" alt="Diet Coke">
+                    <p class="coke-name">Monster Nitro Cosmic Peach</p>
+                       <!--  
+                    <p class="coke-price-text">£3.50</p> -->
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+                
+                <!-- ITEM 6: Monster Lando Norris -->
+                <div class="coke-item" 
+                     data-product-id="106" 
+                     data-price="3.80" 
+                     data-name="Monster Lando Norris"
+                     data-image-url="https://placehold.co/150x200/FAD7A0/000000?text=Monster Lando Norris">
+                    <img src="Monster Lando Norris.jpg" onerror="this.src='Monster Lando Norris'" alt="Monster Lando Norris">
+                    <p class="coke-name">Monster Lando Norris</p>
+                <!--         <p class="coke-price-text">£3.80</p> -->
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+            </div>
+            
+
+
+
+
+
+
+ <div class="coca-cola-grid">
+                
+                <!-- ITEM 7: Monster Full Throttle -->
+                <div class="coke-item" 
+                     data-product-id="107" 
+                     data-price="3.50" 
+                     data-name="Monster Full Throttle"
+                     data-image-url="https://placehold.co/150x200/8A0303/ffffff?text=Monster Full Throttle">
+                    <img src="Monster Full Throttle.jpeg" onerror="this.src='https://placehold.co/150x200/8A0303/ffffff?text=Monster Full Throttle'" alt="Coca-Cola Classic">
+                    <p class="coke-name">Monster Full Throttle</p>
+                   <!--      <p class="coke-price-text">£3.50</p> -->
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+                <!-- ITEM 8: Monster Rossi -->
+                <div class="coke-item" 
+                     data-product-id="108" 
+                     data-price="3.50" 
+                     data-name="Monster Rossi"
+                     data-image-url="https://placehold.co/150x200/333333/ffffff?text=Monster Rossi">
+                    <img src="Monster Rossi.jpg" onerror="this.src='https://placehold.co/150x200/333333/ffffff?text=Monster Rossi'" alt="Coca-Cola Zero Sugar">
+                    <p class="coke-name">Monster Rossi</p>
+                  <!--       <p class="coke-price-text">£3.50</p> -->
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+                
+                <!-- ITEM 9: Monster Rossi Zero sugar -->
+                <div class="coke-item" 
+                     data-product-id="109" 
+                     data-price="3.80" 
+                     data-name="Monster Rossi Zero sugar"
+                     data-image-url="https://placehold.co/150x200/C10000/ffffff?text=Monster Rossi Zero sugar">
+                    <img src="Monster Rossi Zero sugar.jpg" onerror="this.src='https://placehold.co/150x200/C10000/ffffff?text=Monster Rossi Zero sugar'" alt="Coca-Cola Cherry">
+                    <p class="coke-name">Monster Rossi Zero sugar</p>
+                  <!--       <p class="coke-price-text">£3.80</p> -->
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+                <!-- ITEM 10: Monster Reserve White Pineapple -->
+                <div class="coke-item" 
+                     data-product-id="110" 
+                     data-price="3.80" 
+                     data-name="Monster Reserve White Pineapple"
+                     data-image-url="https://placehold.co/150x200/FAD7A0/000000?text=Monster Reserve White Pineapple">
+                    <img src="Monster Reserve White Pineapple.jpg" onerror="this.src='https://placehold.co/150x200/FAD7A0/000000?text=Monster Reserve White Pineapple'" alt="Coca-Cola Vanilla">
+                    <p class="coke-name">Monster Reserve White Pineapple</p>
+               <!--          <p class="coke-price-text">£3.80</p> -->
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+                
+                <!-- ITEM 11: Monster RESERVE ORANGE DREAMSICLE -->
+                <div class="coke-item" 
+                     data-product-id="111" 
+                     data-price="3.50" 
+                     data-name="Monster RESERVE ORANGE DREAMSICLE "
+                     data-image-url="https://placehold.co/150x200/eeeeee/333333?text=Monster RESERVE ORANGE DREAMSICLE ">
+                    <img src="Monster RESERVE ORANGE DREAMSICLE  .avif" onerror="this.src='https://placehold.co/150x200/eeeeee/333333?text=Monster RESERVE ORANGE DREAMSICLE '" alt="Diet Coke">
+                    <p class="coke-name">Monster RESERVE ORANGE DREAMSICLE </p>
+               <!--          <p class="coke-price-text">£3.50</p> -->
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+                
+                <!-- ITEM 12: MONSTER PIPELINE PUNCH  -->
+                <div class="coke-item" 
+                     data-product-id="112" 
+                     data-price="3.80" 
+                     data-name="MONSTER PIPELINE PUNCH"
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=MONSTER PIPELINE PUNCH">
+                    <img src="MONSTER PIPELINE PUNCH  .jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=MONSTER PIPELINE PUNCH'" alt="Coca-Cola Lime">
+                    <p class="coke-name">MONSTER PIPELINE PUNCH</p>
+               <!--          <p class="coke-price-text">£3.80</p> -->
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+
+
+
+                <!-- ITEM 13: MONSTER MANGO LOCO  -->
+                <div class="coke-item" 
+                     data-product-id="113" 
+                     data-price="3.80" 
+                     data-name="MONSTER MANGO LOCO "
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=MONSTER MANGO LOCO ">
+                    <img src="MONSTER MANGO LOCO .avif" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=MONSTER MANGO LOCO '" alt="Coca-Cola Lime">
+                    <p class="coke-name">MONSTER MANGO LOCO </p>
+              <!--           <p class="coke-price-text">£3.80</p> -->
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+                <!-- ITEM 14: MONSTER PACIFIC PUNCH  -->
+                <div class="coke-item" 
+                     data-product-id="114" 
+                     data-price="3.80" 
+                     data-name="MONSTER PACIFIC PUNCH"
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=MONSTER PACIFIC PUNCH">
+                    <img src="MONSTER PACIFIC PUNCH  .jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=MONSTER PACIFIC PUNCH'" alt="Coca-Cola Lime">
+                    <p class="coke-name">MONSTER PACIFIC PUNCH </p>
+             <!--            <p class="coke-price-text">£3.80</p> -->
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+
+                <!-- ITEM 15: MONSTER MONARCH  -->
+                <div class="coke-item" 
+                     data-product-id="115" 
+                     data-price="3.80" 
+                     data-name="MONSTER MONARCH "
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=MONSTER MONARCH ">
+                    <img src="MONSTER MONARCH  .avif" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=MONSTER MONARCH '" alt="Coca-Cola Lime">
+                    <p class="coke-name">MONSTER MONARCH</p>
+             <!--            <p class="coke-price-text">£3.80</p> -->
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+
+
+                <!-- ITEM 16: MONSTER RIPPER  -->
+                <div class="coke-item" 
+                     data-product-id="116" 
+                     data-price="3.80" 
+                     data-name="MONSTER RIPPER "
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=MONSTER RIPPER ">
+                    <img src="MONSTER RIPPER.avif" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=MONSTER RIPPER'" alt="Coca-Cola Lime">
+                    <p class="coke-name">MONSTER RIPPER </p>
+             <!--            <p class="coke-price-text">£3.80</p> -->
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+
+
+                <!-- ITEM 17: MONSTER MIXXD PUNCH  -->
+                <div class="coke-item" 
+                     data-product-id="117" 
+                     data-price="3.80" 
+                     data-name="MONSTER MIXXD PUNCH "
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=MONSTER MIXXD PUNCH ">
+                    <img src="MONSTER MIXXD PUNCH .jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=MONSTER MIXXD PUNCH '" alt="Coca-Cola Lime">
+                    <p class="coke-name">MONSTER MIXXD PUNCH </p>
+              <!--           <p class="coke-price-text">£3.80</p> -->
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+
+
+                <!-- ITEM 18: MONSTER KHAOTIC -->
+                <div class="coke-item" 
+                     data-product-id="118" 
+                     data-price="3.80" 
+                     data-name="MONSTER KHAOTIC"
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=MONSTER KHAOTIC">
+                    <img src="MONSTER KHAOTIC .jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=MONSTER KHAOTIC'" alt="Coca-Cola Lime">
+                    <p class="coke-name">MONSTER KHAOTIC</p>
+          <!--               <p class="coke-price-text">£3.80</p> -->
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+
+
+                <!-- ITEM 19: MONSTER AUSSIE LEMONADE  -->
+                <div class="coke-item" 
+                     data-product-id="119" 
+                     data-price="3.80" 
+                     data-name="MONSTER AUSSIE LEMONADE "
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=MONSTER AUSSIE LEMONADE ">
+                    <img src="MONSTER AUSSIE LEMONADE  .jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=MONSTER AUSSIE LEMONADE '" alt="Coca-Cola Lime">
+                    <p class="coke-name">MONSTER AUSSIE LEMONADE </p>
+       <!--                  <p class="coke-price-text">£3.80</p> -->
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+
+
+                <!-- ITEM 20: MONSTER BAD APPLE -->
+                <div class="coke-item" 
+                     data-product-id="120" 
+                     data-price="3.80" 
+                     data-name="MONSTER BAD APPLE"
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=MONSTER BAD APPLE">
+                    <img src="MONSTER BAD APPLE .jpeg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=MONSTER BAD APPLE'" alt="Coca-Cola Lime">
+                    <p class="coke-name">MONSTER BAD APPLE</p>
+            <!--             <p class="coke-price-text">£3.80</p> -->
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+
+
+                <!-- ITEM 21: MONSTER RIO PUNCH -->
+                <div class="coke-item" 
+                     data-product-id="121" 
+                     data-price="3.80" 
+                     data-name="MONSTER RIO PUNCH"
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=MONSTER RIO PUNCH">
+                    <img src="MONSTER RIO PUNCH.jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=MONSTER RIO PUNCH'" alt="Coca-Cola Lime">
+                    <p class="coke-name">MONSTER RIO PUNCH</p>
+             <!--            <p class="coke-price-text">£3.80</p> -->
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+
+
+                <!-- ITEM 22: Monster ULTRA WHITE  -->
+                <div class="coke-item" 
+                     data-product-id="122" 
+                     data-price="3.80" 
+                     data-name="Monster ULTRA WHITE "
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA WHITE ">
+                    <img src="Monster ULTRA WHITE  .jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA WHITE '" alt="Coca-Cola Lime">
+                    <p class="coke-name">Monster ULTRA WHITE </p>
+                <!--         <p class="coke-price-text">£3.80</p> -->
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+
+
+                <!-- ITEM 23: Monster ULTRA FIESTA MANGO  -->
+                <div class="coke-item" 
+                     data-product-id="123" 
+                     data-price="3.80" 
+                     data-name="Monster ULTRA FIESTA MANGO "
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA FIESTA MANGO">
+                    <img src="Monster ULTRA FIESTA MANGO  .jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA FIESTA MANGO '" alt="Coca-Cola Lime">
+                    <p class="coke-name">Monster ULTRA FIESTA MANGO </p>
+                 <!--        <p class="coke-price-text">£3.80</p> -->
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+
+
+                <!-- ITEM 24: Monster ULTRA PARADISE  -->
+                <div class="coke-item" 
+                     data-product-id="124" 
+                     data-price="3.80" 
+                     data-name="Monster ULTRA PARADISE "
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA PARADISE ">
+                    <img src="Monster ULTRA PARADISE  .jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA PARADISE '" alt="Coca-Cola Lime">
+                    <p class="coke-name">Monster ULTRA PARADISE </p>
+                <!--         <p class="coke-price-text">£3.80</p> -->
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+
+
+                <!-- ITEM 25: Monster ULTRA ROSA -->
+                <div class="coke-item" 
+                     data-product-id="125" 
+                     data-price="3.80" 
+                     data-name="Monster ULTRA ROSA"
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA ROSA">
+                    <img src="Monster ULTRA ROSA .jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA ROSA'" alt="Coca-Cola Lime">
+                    <p class="coke-name">Monster ULTRA ROSA</p>
+                <!--         <p class="coke-price-text">£3.80</p> -->
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+
+
+                <!-- ITEM 26: Monster ULTRA WATERMELON -->
+                <div class="coke-item" 
+                     data-product-id="126" 
+                     data-price="3.80" 
+                     data-name="Monster ULTRA WATERMELON"
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA WATERMELON">
+                    <img src="Monster ULTRA WATERMELON  .avif" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA WATERMELON'" alt="Coca-Cola Lime">
+                    <p class="coke-name">Monster ULTRA WATERMELON</p>
+                <!--         <p class="coke-price-text">£3.80</p> -->
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+
+
+
+                <!-- ITEM 27: Monster ULTRA GOLDEN PINEAPPLE  -->
+                <div class="coke-item" 
+                     data-product-id="127" 
+                     data-price="3.80" 
+                     data-name="Monster ULTRA GOLDEN PINEAPPLE "
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA GOLDEN PINEAPPLE ">
+                    <img src="Monster ULTRA GOLDEN PINEAPPLE  .jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA GOLDEN PINEAPPLE '" alt="Coca-Cola Lime">
+                    <p class="coke-name">Monster ULTRA GOLDEN PINEAPPLE </p>
+               <!--          <p class="coke-price-text">£3.80</p> -->
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+
+
+
+                <!-- ITEM 28: Monster ULTRA PEACHY KEEN \ -->
+                <div class="coke-item" 
+                     data-product-id="128" 
+                     data-price="3.80" 
+                     data-name="Monster ULTRA PEACHY KEEN "
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA PEACHY KEEN ">
+                    <img src="Monster ULTRA PEACHY KEEN  .jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA PEACHY KEEN '" alt="Coca-Cola Lime">
+                    <p class="coke-name">Monster ULTRA PEACHY KEEN </p>
+               <!--          <p class="coke-price-text">£3.80</p> -->
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+
+
+
+                <!-- ITEM 29: Monster ULTRA STRAWBERRY DREAMS  -->
+                <div class="coke-item" 
+                     data-product-id="129" 
+                     data-price="3.80" 
+                     data-name="Monster ULTRA STRAWBERRY DREAMS "
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA STRAWBERRY DREAMS">
+                    <img src="Monster ULTRA STRAWBERRY DREAMS .webp" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA STRAWBERRY DREAMS '" alt="Coca-Cola Lime">
+                    <p class="coke-name">Monster ULTRA STRAWBERRY DREAMS </p>
+               <!--          <p class="coke-price-text">£3.80</p> -->
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+
+
+
+
+                <!-- ITEM 30: Monster ULTRA FANTASY RUBYRED -->
+                <div class="coke-item" 
+                     data-product-id="130" 
+                     data-price="3.80" 
+                     data-name="Monster ULTRA FANTASY RUBYRED"
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA FANTASY RUBYRED">
+                    <img src="Monster ULTRA FANTASY RUBYRED.jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Monster ULTRA FANTASY RUBYRED'" alt="Coca-Cola Lime">
+                    <p class="coke-name">Monster ULTRA FANTASY RUBYRED</p>
+               <!--          <p class="coke-price-text">£3.80</p>-->
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+                
+            </div>
+
+
+
+
+            
+            <div class="view-cart-cta">
+                <button id="view-selected-cart-btn" class="btn dark-teal-bg-btn">
+                    View My Selected Items & Checkout 
+                    <i class="fas fa-shopping-cart"></i>
+                </button>
+            </div>
+        </div>
+
+
+
+
+
+
+
+ <!-- -----------------------------------------------The Monster Collection ends --------------------------------------------------------->
+
+
+
+
+
+        
+        <h2 style="text-align: center; margin-top: 40px; color: var(--color-dark-teal);">Seasonal Luxury Hampers</h2>
+        
+        <!-- Hamper Product Grid -->
+        <div class="product-grid">
+            <!-- Product 1: Gourmet Cheese -->
+            <div class="product-card" data-product-id="1" data-price="79.99" data-name="Gourmet Cheese Selection">
+                <img src="https://placehold.co/300x200/8A0303/ffffff?text=Fireside+Hamper" onerror="this.src='https://placehold.co/300x200/004d4d/ffffff?text=Gourmet+Hamper'" alt="Gourmet Cheese Selection">
+                <h3>Gourmet Cheese Selection</h3>
+                <p>A curated box of five world-class artisanal cheeses and crackers.</p>
+                <span class="price">£79.99</span>
+                <button class="btn dark-teal-bg-btn add-to-cart-btn">Add to Cart</button>
+            </div>
+
+            <!-- Product 2: Fireside Feast -->
+            <div class="product-card" data-product-id="2" data-price="121.50" data-name="Fireside Feast Hamper">
+                <img src="https://placehold.co/300x200/8A0303/ffffff?text=Fireside+Hamper" onerror="this.src='https://placehold.co/300x200/8A0303/ffffff?text=Fireside+Hamper'" alt="Fireside Feast Hamper">
+                <h3>Fireside Feast Hamper</h3>
+                <p>Hot cocoa, premium marshmallows, and spiced biscuits for a cozy evening.</p>
+                <span class="price">£121.50</span>
+                <button class="btn dark-teal-bg-btn add-to-cart-btn">Add to Cart</button>
+            </div>
+            
+            <!-- Product 3: Vegan Delight -->
+            <div class="product-card" data-product-id="3" data-price="95.00" data-name="Vegan Delight Collection">
+                <img src="https://placehold.co/300x200/008080/ffffff?text=Vegan+Hamper" onerror="this.src='https://placehold.co/300x200/008080/ffffff?text=Vegan+Hamper'" alt="Vegan Delight Collection">
+                <h3>Vegan Delight Collection</h3>
+                <p>Dairy-free chocolates, organic nuts, and fine herbal teas.</p>
+                <span class="price">£95.00</span>
+                <button class="btn dark-teal-bg-btn add-to-cart-btn">Add to Cart</button>
+            </div>
+            
+            <!-- Product 4: Tea Lover's Dream -->
+            <div class="product-card" data-product-id="4" data-price="55.99" data-name="The Tea Lover's Dream">
+                <img src="https://placehold.co/300x200/ffc107/333333?text=Tea+Hamper" onerror="this.src='https://placehold.co/300x200/ffc107/333333?text=Tea+Hamper'" alt="The Tea Lover's Dream">
+                <h3>The Tea Lover's Dream</h3>
+                <p>Assortment of black, green, and oolong teas with a vintage tea strainer.</p>
+                <span class="price">£55.99</span>
+                <button class="btn dark-teal-bg-btn add-to-cart-btn">Add to Cart</button>
+            </div>
+        </div>
+
+    </main>
+
+
+
+
+
+ <!-- -----------------------------------------------The Lucozade  Collection starts --------------------------------------------------------->
+
+
+
+     <!-- Main Content -->
+    <main class="container">
+        
+        <!-- === COCA-COLA BUILD-YOUR-OWN SECTION (Image Click Feature) === -->
+        <div class="build-your-own-section">
+            <h2>The Lucozade Collection 🥤</h2>
+            <img src="Lucozade/Lucozade logo.jpg" width="200px" height="40px" alt="">
+            <p class="sub-heading">Click on any bottle to add it instantly to your hamper.</p>
+
+            <div class="coca-cola-grid">
+                
+                <!-- ITEM 1:Lucozade original 500ml-->
+                <div class="coke-item" 
+                     data-product-id="131" 
+                     data-price="3.50" 
+                     data-name="Lucozade original 500ml"
+                     data-image-url="https://placehold.co/150x200/8A0303/ffffff?text=Lucozade original 500ml">
+                    <img src="Lucozade/Lucozade original 500ml .jpg" onerror="this.src='https://placehold.co/150x200/8A0303/ffffff?text=Lucozade original 500ml'" alt="Coca-Cola Classic">
+                    <p class="coke-name">Lucozade original 500ml</p>
+                    <p class="coke-price-text">£3.50</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+                <!-- ITEM 2: Lucozade orange 500ml -->
+                <div class="coke-item" 
+                     data-product-id="132" 
+                     data-price="3.50" 
+                     data-name="Lucozade orange 500ml"
+                     data-image-url="https://placehold.co/150x200/333333/ffffff?text=Lucozade orange 500ml">
+                    <img src="Lucozade/Lucozade orange 500ml .avif" onerror="this.src='https://placehold.co/150x200/333333/ffffff?text=Lucozade orange 500ml'" alt="Coca-Cola Zero Sugar">
+                    <p class="coke-name">Lucozade orange 500ml</p>
+                    <p class="coke-price-text">£3.50</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+                
+                <!-- ITEM 3: Lucozade apple 500ml -->
+                <div class="coke-item" 
+                     data-product-id="133" 
+                     data-price="3.80" 
+                     data-name="Lucozade apple 500ml"
+                     data-image-url="https://placehold.co/150x200/C10000/ffffff?text=Lucozade apple 500ml">
+                    <img src="Lucozade/Lucozade apple 500ml .png" onerror="this.src='https://placehold.co/150x200/C10000/ffffff?text=Lucozade apple 500ml'" alt="Coca-Cola Cherry">
+                    <p class="coke-name">Lucozade apple 500ml</p>
+                    <p class="coke-price-text">£3.80</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+                <!-- ITEM 4: Lucozade Caribbean crush 500ml -->
+                <div class="coke-item" 
+                     data-product-id="134" 
+                     data-price="3.80" 
+                     data-name="Lucozade Caribbean crush 500ml"
+                     data-image-url="https://placehold.co/150x200/FAD7A0/000000?text=Lucozade Caribbean crush 500ml">
+                    <img src="Lucozade/Lucozade Caribbean crush 500ml .webp" onerror="this.src='https://placehold.co/150x200/FAD7A0/000000?text=Lucozade Caribbean crush 500ml'" alt="Coca-Cola Vanilla">
+                    <p class="coke-name">Lucozade Caribbean crush 500ml</p>
+                    <p class="coke-price-text">£3.80</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+                
+                <!-- ITEM 5: Lucozade Cherry 500ml -->
+                <div class="coke-item" 
+                     data-product-id="135" 
+                     data-price="3.50" 
+                     data-name="Lucozade Cherry 500ml"
+                     data-image-url="https://placehold.co/150x200/FAD7A0/000000?text=Lucozade Cherry 500ml">
+                    <img src="Lucozade/Lucozade Cherry 500ml .avif" onerror="this.src='https://placehold.co/150x200/eeeeee/333333?text=Lucozade Cherry 500ml'" alt="Diet Coke">
+                    <p class="coke-name">Lucozade Cherry 500ml</p>
+                    <p class="coke-price-text">£3.50</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+                
+                <!-- ITEM 6: Lucozade Pink lemonade 500ml-->
+                <div class="coke-item" 
+                     data-product-id="136" 
+                     data-price="3.80" 
+                     data-name="Lucozade Pink lemonade 500ml"
+                     data-image-url="https://placehold.co/150x200/FAD7A0/000000?text=Lucozade Pink lemonade 500ml">
+                    <img src="Lucozade/Lucozade Pink lemonade 500ml .avif" onerror="this.src='Lucozade Pink lemonade 500ml'" alt="Monster Lando Norris">
+                    <p class="coke-name">Lucozade Pink lemonade 500ml</p>
+                    <p class="coke-price-text">£3.80</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+            </div>
+            
+
+
+
+
+
+
+ <div class="coca-cola-grid">
+                
+                <!-- ITEM 7: Lucozade blue burst 500ml -->
+                <div class="coke-item" 
+                     data-product-id="137" 
+                     data-price="3.50" 
+                     data-name="Lucozade blue burst 500ml"
+                     data-image-url="https://placehold.co/150x200/8A0303/ffffff?text=Lucozade blue burst 500ml">
+                    <img src="Lucozade/Lucozade blue burst 500ml .jpg" onerror="this.src='https://placehold.co/150x200/8A0303/ffffff?text=Lucozade blue burst 500ml'" alt="Coca-Cola Classic">
+                    <p class="coke-name">Lucozade blue burst 500ml</p>
+                    <p class="coke-price-text">£3.50</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+                <!-- ITEM 8: Lucozade sport orange -->
+                <div class="coke-item" 
+                     data-product-id="138" 
+                     data-price="3.50" 
+                     data-name="Lucozade sport orange"
+                     data-image-url="https://placehold.co/150x200/333333/ffffff?text=Lucozade sport orange">
+                    <img src="Lucozade/Lucozade sport orange .avif" onerror="this.src='https://placehold.co/150x200/333333/ffffff?text=Lucozade sport orange'" alt="Coca-Cola Zero Sugar">
+                    <p class="coke-name">Lucozade sport orange</p>
+                    <p class="coke-price-text">£3.50</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+                
+                <!-- ITEM 9: Lucozade sport raspberry -->
+                <div class="coke-item" 
+                     data-product-id="139" 
+                     data-price="3.80" 
+                     data-name="Lucozade sport raspberry"
+                     data-image-url="https://placehold.co/150x200/C10000/ffffff?text=Lucozade sport raspberry">
+                    <img src="Lucozade/Lucozade sport raspberry.jpeg" onerror="this.src='https://placehold.co/150x200/C10000/ffffff?text=Lucozade sport raspberry'" alt="Coca-Cola Cherry">
+                    <p class="coke-name">Lucozade sport raspberry</p>
+                    <p class="coke-price-text">£3.80</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+                <!-- ITEM 10: Lucozade blue force-->
+                <div class="coke-item" 
+                     data-product-id="140" 
+                     data-price="3.80" 
+                     data-name="Lucozade blue force"
+                     data-image-url="https://placehold.co/150x200/FAD7A0/000000?text=Lucozade blue force">
+                    <img src="Lucozade/Lucozade blue force .jpg" onerror="this.src='https://placehold.co/150x200/FAD7A0/000000?text=Lucozade blue force'" alt="Coca-Cola Vanilla">
+                    <p class="coke-name">Lucozade blue force</p>
+                    <p class="coke-price-text">£3.80</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+                
+                <!-- ITEM 11: Lucozade sport ice kick -->
+                <div class="coke-item" 
+                     data-product-id="141" 
+                     data-price="3.50" 
+                     data-name="Lucozade sport ice kick "
+                     data-image-url="https://placehold.co/150x200/eeeeee/333333?text=Lucozade sport ice kick ">
+                    <img src="Lucozade/Lucozade sport ice kick .jpg" onerror="this.src='https://placehold.co/150x200/eeeeee/333333?text=Lucozade sport ice kick '" alt="Diet Coke">
+                    <p class="coke-name">Lucozade sport ice kick </p>
+                    <p class="coke-price-text">£3.50</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+                
+                <!-- ITEM 12: Lucozade sport fruit punch  -->
+                <div class="coke-item" 
+                     data-product-id="142" 
+                     data-price="3.80" 
+                     data-name="Lucozade sport fruit punch"
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=Lucozade sport fruit punch">
+                    <img src="Lucozade/Lucozade sport fruit punch .jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Lucozade sport fruit punch'" alt="Coca-Cola Lime">
+                    <p class="coke-name">Lucozade sport fruit punch</p>
+                    <p class="coke-price-text">£3.80</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+
+
+
+                <!-- ITEM 13: Lucozade Alert cherry blast 500ml-->
+                <div class="coke-item" 
+                     data-product-id="143" 
+                     data-price="3.80" 
+                     data-name="Lucozade Alert cherry blast 500ml "
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=Lucozade Alert cherry blast 500ml ">
+                    <img src="Lucozade/Lucozade Alert cherry blast 500ml .webp" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Lucozade Alert cherry blast 500ml '" alt="Coca-Cola Lime">
+                    <p class="coke-name">Lucozade Alert cherry blast 500ml </p>
+                    <p class="coke-price-text">£3.80</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+                <!-- ITEM 14: Lucozade Alert original 500ml -->
+                <div class="coke-item" 
+                     data-product-id="144" 
+                     data-price="3.80" 
+                     data-name="Lucozade Alert original 500ml"
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=Lucozade Alert original 500ml">
+                    <img src="Lucozade/Lucozade Alert original 500ml .avif" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Lucozade Alert original 500ml'" alt="Coca-Cola Lime">
+                    <p class="coke-name">Lucozade Alert original 500ml</p>
+                    <p class="coke-price-text">£3.80</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+
+                <!-- ITEM 15: Lucozade Alert tropical burst 500ml  -->
+                <div class="coke-item" 
+                     data-product-id="145" 
+                     data-price="3.80" 
+                     data-name="Lucozade Alert tropical burst 500ml "
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=Lucozade Alert tropical burst 500ml ">
+                    <img src="Lucozade/Lucozade Alert tropical burst 500ml .jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Lucozade Alert tropical burst 500ml '" alt="Coca-Cola Lime">
+                    <p class="coke-name">Lucozade Alert tropical burst 500ml</p>
+                    <p class="coke-price-text">£3.80</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+
+
+                <!-- ITEM 16: Lucozade Alert Blue Rush 500ml  -->
+                <div class="coke-item" 
+                     data-product-id="146" 
+                     data-price="3.80" 
+                     data-name="Lucozade Alert Blue Rush 500ml "
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=Lucozade Alert Blue Rush 500ml">
+                    <img src="Lucozade/Lucozade Alert Blue Rush 500ml .jpeg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Lucozade Alert Blue Rush 500ml'" alt="Coca-Cola Lime">
+                    <p class="coke-name">Lucozade Alert Blue Rush 500ml</p>
+                    <p class="coke-price-text">£3.80</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+
+
+                <!-- ITEM 17:Lucozade Alert Mango peachade 500ml -->
+                <div class="coke-item" 
+                     data-product-id="147" 
+                     data-price="3.80" 
+                     data-name="Lucozade Alert Mango peachade 500ml "
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=Lucozade Alert Mango peachade 500ml ">
+                    <img src="Lucozade/Lucozade Alert Mango peachade 500ml .jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Lucozade Alert Mango peachade 500ml '" alt="Coca-Cola Lime">
+                    <p class="coke-name">Lucozade Alert Mango peachade 500ml </p>
+                    <p class="coke-price-text">£3.80</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+
+
+                <!-- ITEM 18: Ribena Bluecarrent 500ml-->
+                <div class="coke-item" 
+                     data-product-id="148" 
+                     data-price="3.80" 
+                     data-name="Ribena Bluecarrent 500ml"
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=Ribena Bluecarrent 500ml">
+                    <img src="Lucozade/Ribena Bluecarrent 500ml .jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Ribena Bluecarrent 500ml'" alt="Coca-Cola Lime">
+                    <p class="coke-name">Ribena Bluecarrent 500ml</p>
+                    <p class="coke-price-text">£3.80</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+
+
+                <!-- ITEM 19: Ribena very berry 500ml  -->
+                <div class="coke-item" 
+                     data-product-id="149" 
+                     data-price="3.80" 
+                     data-name="Ribena very berry 500ml"
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=Ribena very berry 500ml ">
+                    <img src="Lucozade/Ribena very berry 500ml .webp" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Ribena very berry 500ml '" alt="Coca-Cola Lime">
+                    <p class="coke-name">Ribena very berry 500ml </p>
+                    <p class="coke-price-text">£3.80</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+
+
+                <!-- ITEM 20: Ribena strawberry 500ml-->
+                <div class="coke-item" 
+                     data-product-id="150" 
+                     data-price="3.80" 
+                     data-name="Ribena strawberry 500ml"
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=Ribena strawberry 500ml">
+                    <img src="Lucozade/Ribena strawberry 500ml .avif" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Ribena strawberry 500ml'" alt="Coca-Cola Lime">
+                    <p class="coke-name">Ribena strawberry 500ml</p>
+                    <p class="coke-price-text">£3.80</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+
+
+                <!-- ITEM 21: Ribena Bluecarrent no sugar 500ml -->
+                <div class="coke-item" 
+                     data-product-id="151" 
+                     data-price="3.80" 
+                     data-name="Ribena Bluecarrent no sugar 500ml"
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=Ribena Bluecarrent no sugar 500ml">
+                    <img src="Lucozade/Ribena Bluecarrent no sugar 500ml .jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Ribena Bluecarrent no sugar 500ml'" alt="Coca-Cola Lime">
+                    <p class="coke-name">Ribena Bluecarrent no sugar 500ml</p>
+                    <p class="coke-price-text">£3.80</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+
+
+                <!-- ITEM 22: Ribena strawberry no sugar 500ml -->
+                <div class="coke-item" 
+                     data-product-id="152" 
+                     data-price="3.80" 
+                     data-name="Ribena strawberry no sugar 500ml "
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=Ribena strawberry no sugar 500ml ">
+                    <img src="Lucozade/Ribena strawberry no sugar 500ml .jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Ribena strawberry no sugar 500ml '" alt="Coca-Cola Lime">
+                    <p class="coke-name">Ribena strawberry no sugar 500ml</p>
+                    <p class="coke-price-text">£3.80</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+
+
+                <!-- ITEM 23: Ribena very berry no sugar 500ml  -->
+                <div class="coke-item" 
+                     data-product-id="153" 
+                     data-price="3.80" 
+                     data-name="Ribena very berry no sugar 500ml "
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=Ribena very berry no sugar 500ml">
+                    <img src="Lucozade/Ribena very berry no sugar 500ml .webp" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Ribena very berry no sugar 500ml'" alt="Coca-Cola Lime">
+                    <p class="coke-name">Ribena very berry no sugar 500ml </p>
+                    <p class="coke-price-text">£3.80</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+
+
+                
+
+                
+            </div>
+
+
+
+
+            
+           
+        </div>
+
+
+
+
+    </main>
+
+
+ <!-- -----------------------------------------------The Lucozade  Collection ends- --------------------------------------------------------->
+
+
+
+
+
+
+
+ <!-- -----------------------------------------------The REDBULL  Collection STARTS- --------------------------------------------------------->
+
+
+
+
+
+
+
+
+
+
+     <!-- Main Content -->
+    <main class="container">
+        
+        <!-- === COCA-COLA BUILD-YOUR-OWN SECTION (Image Click Feature) === -->
+        <div class="build-your-own-section">
+            <h2>The Red bull Collection 🥤</h2>
+            <img src="redbull/redbull logo.png" width="200px"  alt="">
+            <p class="sub-heading">Click on any bottle to add it instantly to your hamper.</p>
+
+            <div class="coca-cola-grid">
+                
+                <!-- ITEM 1:The Winter edition -->
+                <div class="coke-item" 
+                     data-product-id="154" 
+                     data-price="3.50" 
+                     data-name="The Winter edition"
+                     data-image-url="https://placehold.co/150x200/8A0303/ffffff?text=The Winter edition ">
+                    <img src="/redbull/The Winter edition  .webp" onerror="this.src='https://placehold.co/150x200/8A0303/ffffff?text=The Winter edition '" alt="Coca-Cola Classic">
+                    <p class="coke-name">The Winter edition </p>
+                    <p class="coke-price-text">£3.50</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+                <!-- ITEM 2: The blue edition  -->
+                <div class="coke-item" 
+                     data-product-id="155" 
+                     data-price="3.50" 
+                     data-name="The blue edition "
+                     data-image-url="https://placehold.co/150x200/333333/ffffff?text=The blue edition">
+                    <img src="/redbull/The blue edition  .jpg" onerror="this.src='https://placehold.co/150x200/333333/ffffff?text=The blue edition '" alt="Coca-Cola Zero Sugar">
+                    <p class="coke-name">The blue edition </p>
+                    <p class="coke-price-text">£3.50</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+                
+                <!-- ITEM 3: The Green edition -->
+                <div class="coke-item" 
+                     data-product-id="156" 
+                     data-price="3.80" 
+                     data-name="The Green edition"
+                     data-image-url="https://placehold.co/150x200/C10000/ffffff?text=The Green edition">
+                    <img src="/redbull/The Green edition  .jpg" onerror="this.src='https://placehold.co/150x200/C10000/ffffff?text=The Green edition '" alt="Coca-Cola Cherry">
+                    <p class="coke-name">The Green edition </p>
+                    <p class="coke-price-text">£3.80</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+                <!-- ITEM 4: The Red edition  -->
+                <div class="coke-item" 
+                     data-product-id="157" 
+                     data-price="3.80" 
+                     data-name="The Red edition "
+                     data-image-url="https://placehold.co/150x200/FAD7A0/000000?text=The Red edition ">
+                    <img src="/redbull/The Red edition  .jpeg" onerror="this.src='https://placehold.co/150x200/FAD7A0/000000?text=The Red edition '" alt="Coca-Cola Vanilla">
+                    <p class="coke-name">The Red edition </p>
+                    <p class="coke-price-text">£3.80</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+                
+                <!-- ITEM 5: The Apricot edition  -->
+                <div class="coke-item" 
+                     data-product-id="158" 
+                     data-price="3.50" 
+                     data-name="The Apricot edition "
+                     data-image-url="https://placehold.co/150x200/FAD7A0/000000?text=The Apricot edition ">
+                    <img src="/redbull/The Apricot edition  .avif" onerror="this.src='https://placehold.co/150x200/eeeeee/333333?text=The Apricot edition '" alt="Diet Coke">
+                    <p class="coke-name">The Apricot edition </p>
+                    <p class="coke-price-text">£3.50</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+                
+                <!-- ITEM 6: The tropical edition-->
+                <div class="coke-item" 
+                     data-product-id="159" 
+                     data-price="3.80" 
+                     data-name="The tropical edition"
+                     data-image-url="https://placehold.co/150x200/FAD7A0/000000?text=The tropical edition">
+                    <img src="/redbull/The tropical edition .jpg" onerror="this.src='The tropical edition'" alt="The tropical edition">
+                    <p class="coke-name">The tropical edition</p>
+                    <p class="coke-price-text">£3.80</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+            </div>
+            
+
+
+
+
+
+
+ <div class="coca-cola-grid">
+                
+                <!-- ITEM 7: The coconut edition  -->
+                <div class="coke-item" 
+                     data-product-id="160" 
+                     data-price="3.50" 
+                     data-name="The coconut edition "
+                     data-image-url="https://placehold.co/150x200/8A0303/ffffff?text=The coconut edition ">
+                    <img src="/redbull/The coconut edition  .jpg" onerror="this.src='https://placehold.co/150x200/8A0303/ffffff?text=The coconut edition '" alt="Coca-Cola Classic">
+                    <p class="coke-name">The coconut edition </p>
+                    <p class="coke-price-text">£3.50</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+                <!-- ITEM 8: The ruby edition  -->
+                <div class="coke-item" 
+                     data-product-id="161" 
+                     data-price="3.50" 
+                     data-name="The ruby edition "
+                     data-image-url="https://placehold.co/150x200/333333/ffffff?text=The ruby edition ">
+                    <img src="/redbull/The ruby edition  .webp" onerror="this.src='https://placehold.co/150x200/333333/ffffff?text=The ruby edition '" alt="Coca-Cola Zero Sugar">
+                    <p class="coke-name">The ruby edition </p>
+                    <p class="coke-price-text">£3.50</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+                
+                <!-- ITEM 9: The ice edition  -->
+                <div class="coke-item" 
+                     data-product-id="162" 
+                     data-price="3.80" 
+                     data-name="The ice edition "
+                     data-image-url="https://placehold.co/150x200/C10000/ffffff?text=The ice edition ">
+                    <img src="/redbull/The ice edition .webp" onerror="this.src='https://placehold.co/150x200/C10000/ffffff?text=The ice edition '" alt="Coca-Cola Cherry">
+                    <p class="coke-name">The ice edition </p>
+                    <p class="coke-price-text">£3.80</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+                <!-- ITEM 10: The peach edition -->
+                <div class="coke-item" 
+                     data-product-id="163" 
+                     data-price="3.80" 
+                     data-name="The peach edition "
+                     data-image-url="https://placehold.co/150x200/FAD7A0/000000?text=The peach edition ">
+                    <img src="/redbull/The peach edition  .avif" onerror="this.src='https://placehold.co/150x200/FAD7A0/000000?text=The peach edition '" alt="Coca-Cola Vanilla">
+                    <p class="coke-name">The peach edition </p>
+                    <p class="coke-price-text">£3.80</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+                
+                <!-- ITEM 11: Redbull energy drink 473ml - 2.65£ -->
+                <div class="coke-item" 
+                     data-product-id="164" 
+                     data-price="3.50" 
+                     data-name="Redbull energy drink 473ml - 2.65£ "
+                     data-image-url="https://placehold.co/150x200/eeeeee/333333?text=Redbull energy drink 473ml - 2.65£ ">
+                    <img src="/redbull/Redbull energy drink 473ml - 2.65£ .jpg " onerror="this.src='https://placehold.co/150x200/eeeeee/333333?text=Lucozade sport ice kick '" alt="Diet Coke">
+                    <p class="coke-name">Redbull energy drink 473ml - 2.65£  </p>
+                    <p class="coke-price-text">£3.50</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+                
+                <!-- ITEM 12:Redbull energy drink 355ml - 2.10£  -->
+                <div class="coke-item" 
+                     data-product-id="165" 
+                     data-price="3.80" 
+                     data-name="Redbull energy drink 355ml - 2.10£"
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=Redbull energy drink 355ml - 2.10£">
+                    <img src="/redbull/Redbull energy drink 355ml - 2.10£ .jpeg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Redbull energy drink 355ml - 2.10£'" alt="Coca-Cola Lime">
+                    <p class="coke-name">Redbull energy drink 355ml - 2.10£</p>
+                    <p class="coke-price-text">£3.80</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+
+
+
+                <!-- ITEM 13: Redbull energy drink 250ml - 1.65£-->
+                <div class="coke-item" 
+                     data-product-id="166" 
+                     data-price="3.80" 
+                     data-name="Redbull energy drink 250ml - 1.65£ "
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=Redbull energy drink 250ml - 1.65£ ">
+                    <img src="/redbull/Redbull energy drink 250ml - 1.65£ .webp" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Redbull energy drink 250ml - 1.65£ '" alt="Coca-Cola Lime">
+                    <p class="coke-name">Redbull energy drink 250ml - 1.65£ </p>
+                    <p class="coke-price-text">£3.80</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+                <!-- ITEM 14: Redbull sugar free 473ml - 2.50£ -->
+                <div class="coke-item" 
+                     data-product-id="167" 
+                     data-price="3.80" 
+                     data-name="Redbull sugar free 473ml - 2.50£"
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=Redbull sugar free 473ml - 2.50£">
+                    <img src="/redbull/Redbull sugar free 473ml - 2.50£ .jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Redbull sugar free 473ml - 2.50£'" alt="Coca-Cola Lime">
+                    <p class="coke-name">Redbull sugar free 473ml - 2.50£</p>
+                    <p class="coke-price-text">£3.80</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+
+                <!-- ITEM 15: Redbull sugar free 355ml - 2.00£  -->
+                <div class="coke-item" 
+                     data-product-id="168" 
+                     data-price="3.80" 
+                     data-name="Redbull sugar free 355ml - 2.00£ "
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=Redbull sugar free 355ml - 2.00£ ">
+                    <img src="/redbull/Redbull sugar free 355ml - 2.00£ .jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Redbull sugar free 355ml - 2.00£ '" alt="Coca-Cola Lime">
+                    <p class="coke-name">Redbull sugar free 355ml - 2.00£</p>
+                    <p class="coke-price-text">£3.80</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+
+
+                <!-- ITEM 16: Redbull sugar free 250ml - 1.60£ -->
+                <div class="coke-item" 
+                     data-product-id="169" 
+                     data-price="3.80" 
+                     data-name="Redbull sugar free 250ml - 1.60£ "
+                     data-image-url="https://placehold.co/150x200/006400/ffffff?text=Redbull sugar free 250ml - 1.60£">
+                    <img src="/redbull/Redbull sugar free 250ml - 1.60£.jpg" onerror="this.src='https://placehold.co/150x200/006400/ffffff?text=Lucozade Alert Blue Rush 500ml'" alt="Coca-Cola Lime">
+                    <p class="coke-name">Redbull sugar free 250ml - 1.60£</p>
+                    <p class="coke-price-text">£3.80</p>
+                    <i class="fas fa-plus-circle add-icon"></i>
+                </div>
+
+
+
+
+
+
+
+
+
+
+                                
+            </div>
+
+           
+        </div>
+
+
+    </main>
+
+
+
+
+ <!-- -----------------------------------------------The REDBULL  Collection ENDS --------------------------------------------------------->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+<footer class="portfolio-footer">
+    <div class="footer-content">
+        <div class="contact-info">
+            <h3>Get in Touch</h3>
+            <p>I'm currently available for freelance work.</p>
+            <p>Email: <a href="mailto:your.email@example.com">vijaygone1123@gmail.com</a></p>
+            </div>
+
+        <form class="contact-form" action="https://formspree.io/f/mldlrwpr" method="POST">
+            <h3>Send a Quick Message</h3>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2025 Gone Vijaykumar. All rights reserved.</p>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ---------------- CART STATE ---------------- */
+let cartItems = [];
+let selectedProducts = new Set();  // store unique selected product IDs
+
+const miniCart = document.getElementById('mini-cart');
+const miniCartItemsContainer = document.getElementById('mini-cart-items');
+const miniCartCount = document.getElementById('mini-cart-count');
+const notificationElement = document.getElementById('notification');
+
+/* ---------------- UTILITIES ---------------- */
+function showNotification(message) {
+    notificationElement.textContent = message;
+    notificationElement.classList.add('show');
+    setTimeout(() => {
+        notificationElement.classList.remove('show');
+    }, 3000);
+}
+
+function calculateTotals() {
+    let quantity = 0;
+    cartItems.forEach(item => quantity += item.qty);
+    return { quantity };
+}
+
+function renderMiniCart() {
+    const { quantity } = calculateTotals();
+    miniCartCount.textContent = quantity;
+
+    const checkoutBtn = document.getElementById('view-cart-checkout-btn');
+    const shareBtns = document.querySelectorAll('.share-btn');
+
+    if (cartItems.length === 0) {
+        miniCartItemsContainer.innerHTML =
+            '<p style="text-align:center;color:#555;padding:20px;">Your basket is currently empty.</p>';
+        checkoutBtn.disabled = true;
+        shareBtns.forEach(btn => (btn.disabled = true));
+    } else {
+        checkoutBtn.disabled = false;
+        shareBtns.forEach(btn => (btn.disabled = false));
+
+        miniCartItemsContainer.innerHTML = cartItems
+            .map(item => `
+            <div class="cart-item">
+                <div class="item-img-container">
+                    <img src="${item.image}" alt="${item.name}">
+                </div>
+
+                <div class="item-details">
+                    <p class="item-name">${item.name}</p>
+                    <p class="item-quantity">Quantity: ${item.qty}</p>
+                </div>
+
+                <div class="item-actions">
+                    <button class="remove-item-btn" data-id="${item.id}">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
+            </div>`
+            )
+            .join('');
+    }
+}
+
+/* ---------------- EXPORT FUNCTIONS ---------------- */
+function formatCartForText(formatType) {
+    if (cartItems.length === 0) return "";
+
+    const date = new Date().toLocaleDateString();
+    let output = "";
+
+    if (formatType === 'csv') {
+        output += "Product Name,Quantity\n";
+        cartItems.forEach(item => {
+            const safeName = item.name.includes(",") ? `"${item.name}"` : item.name;
+            output += `${safeName},${item.qty}\n`;
+        });
+    } else {
+        output += `--- Order Summary ---\n`;
+        output += `Date: ${date}\n\n`;
+        output += cartItems
+            .map(item => `(${item.qty}x) ${item.name}`)
+            .join("\n");
+        output += `\n\nTotal Items: ${cartItems.length}`;
+        if (formatType === "whatsapp") output = encodeURIComponent(output);
+    }
+
+    return output;
+}
+
+function exportToTxt() {
+    const text = formatCartForText("txt");
+    const blob = new Blob([text], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `Hampers_Order_${new Date().toISOString().slice(0, 10)}.txt`;
+    a.click();
+
+    URL.revokeObjectURL(url);
+    showNotification("Order exported as TXT file!");
+}
+
+function exportToCSV() {
+    const csv = formatCartForText("csv");
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `Hampers_Order_${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+
+    URL.revokeObjectURL(url);
+    showNotification("Order exported as CSV file!");
+}
+
+function shareViaWhatsApp() {
+    const message = formatCartForText("whatsapp");
+    window.open(`https://wa.me/?text=${message}`, "_blank");
+    showNotification("Preparing WhatsApp message...");
+}
+
+/* ---------------- LISTENERS ---------------- */
+function initListeners() {
+
+    /* Open / close cart */
+    document.getElementById("open-mini-cart-btn").addEventListener("click", () => {
+        renderMiniCart();
+        miniCart.classList.add("visible");
+        miniCart.classList.remove("hidden");
+    });
+
+    document.getElementById("close-mini-cart-btn").addEventListener("click", () => {
+        miniCart.classList.add("hidden");
+        miniCart.classList.remove("visible");
+    });
+
+    /* Standard Add to Cart buttons */
+    document.querySelectorAll(".add-to-cart-btn").forEach(btn => {
+        btn.addEventListener("click", e => {
+            const card = e.target.closest(".product-card");
+            const id = Number(card.dataset.productId);
+            const name = card.dataset.name;
+            const image = "https://placehold.co/60x60/808080/ffffff?text=H";
+
+            if (selectedProducts.has(id)) {
+                showNotification("Product already selected");
+                const item = document.querySelector(`.coke-item[data-product-id='${id}']`);
+                if (item) item.classList.add("selected-blur");
+                return;
+            }
+
+            selectedProducts.add(id);
+            cartItems.push({ id, name, qty: 1, image });
+
+            showNotification(`Added 1x ${name}`);
+            renderMiniCart();
+            miniCart.classList.remove("hidden");
+        });
+    });
+
+    /* Coke item click / double-click handler */
+    document.querySelectorAll('.coke-item').forEach(item => {
+
+        // Single click: add to cart
+        item.addEventListener('click', () => {
+            const id = Number(item.dataset.productId);
+            const name = item.dataset.name;
+            const image = item.dataset.imageUrl;
+
+            if (selectedProducts.has(id)) {
+                showNotification("Product already selected");
+                item.classList.add("selected-blur");
+                return;
+            }
+
+            selectedProducts.add(id);
+            cartItems.push({ id, name, qty: 1, image });
+            item.classList.add("selected-blur");
+
+            showNotification(`Added 1x ${name}`);
+            renderMiniCart();
+            miniCart.classList.remove("hidden");
+        });
+
+        // Double click: remove from cart & remove blur
+        item.addEventListener('dblclick', () => {
+            const id = Number(item.dataset.productId);
+            if (!selectedProducts.has(id)) return;
+
+            selectedProducts.delete(id);
+            cartItems = cartItems.filter(cartItem => cartItem.id !== id);
+            item.classList.remove("selected-blur");
+
+            showNotification(`Unselected ${item.dataset.name}`);
+            renderMiniCart();
+        });
+    });
+
+    /* Remove item from mini-cart */
+    miniCartItemsContainer.addEventListener("click", e => {
+        if (e.target.closest(".remove-item-btn")) {
+            const id = Number(e.target.closest(".remove-item-btn").dataset.id);
+
+            cartItems = cartItems.filter(item => item.id !== id);
+            selectedProducts.delete(id);
+
+            const productEl = document.querySelector(`.coke-item[data-product-id='${id}']`);
+            if (productEl) productEl.classList.remove("selected-blur");
+
+            showNotification("Item removed");
+            renderMiniCart();
+        }
+    });
+
+    /* Checkout button */
+    document.getElementById("view-cart-checkout-btn").addEventListener("click", () => {
+        if (cartItems.length === 0) return;
+
+        showNotification(`Checkout complete (mock)`);
+
+        cartItems = [];
+        selectedProducts.clear();
+        document.querySelectorAll('.coke-item').forEach(i => i.classList.remove('selected-blur'));
+
+        renderMiniCart();
+        miniCart.classList.add("hidden");
+    });
+
+    /* Sharing buttons */
+    document.getElementById("export-txt-btn").addEventListener("click", exportToTxt);
+    document.getElementById("export-csv-btn").addEventListener("click", exportToCSV);
+    document.getElementById("share-whatsapp-btn").addEventListener("click", shareViaWhatsApp);
+
+    /* View Selected */
+    const viewSelected = document.getElementById("view-selected-cart-btn");
+    if (viewSelected) {
+        viewSelected.addEventListener("click", () => {
+            renderMiniCart();
+            miniCart.classList.add("visible");
+            miniCart.classList.remove("hidden");
+        });
+    }
+}
+
+/* ---------------- INIT ---------------- */
+document.addEventListener("DOMContentLoaded", () => {
+    initListeners();
+    renderMiniCart();
+});
+
+/* ---------------- SEARCH ---------------- */
+document.getElementById("searchInput").addEventListener("input", function () {
+    let searchText = this.value.toLowerCase();
+    document.querySelectorAll(".coke-item").forEach(item => {
+        let name = item.dataset.name.toLowerCase();
+        item.style.display = name.includes(searchText) ? "block" : "none";
+    });
+});
+
+
+
+
+
+
+
+// Double click: remove from cart & remove blur with animation
+item.addEventListener('dblclick', () => {
+    const id = Number(item.dataset.productId);
+    if (!selectedProducts.has(id)) return;
+
+    selectedProducts.delete(id);
+    cartItems = cartItems.filter(cartItem => cartItem.id !== id);
+
+    // Animate blur removal
+    item.classList.add("remove-blur");
+    setTimeout(() => {
+        item.classList.remove("selected-blur", "remove-blur");
+    }, 300); // match duration of animation
+
+    showNotification(`Unselected ${item.dataset.name}`);
+    renderMiniCart();
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
